@@ -1,13 +1,15 @@
 <template>
-  <div>
+  <div class="main">
     <HemodialysisSession/>
   </div>
 </template>
 
 <script setup lang="ts">
-import HemodialysisSession from "@/components/HemodialysisSession.vue";
+import HemodialysisSession from "@/components/v-hemodialysisSession.vue";
 </script>
 
 <style scoped>
-
+.main {
+  border: 2px solid #a29d9d;
+}
 </style>
