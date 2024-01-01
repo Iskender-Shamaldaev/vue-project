@@ -1,208 +1,303 @@
 <template>
-  <div class="div">
-    <v-popup v-if="isInfoPopupVisible" @onClose="closeInfoPopup" />
+  <div class="session">
+    <v-popup v-if="isInfoPopupVisible" @onClose="closeInfoPopup"/>
 
-    <h3>Сеанс гемодиализа</h3>
+    <h3 class="session__title">Сеанс гемодиализа</h3>
     <p>No месяце:<span class="blue"> 4 </span></p>
   </div>
 
-  <h3> Назначения сеанса гемодиализа</h3>
+  <h3 class="session__title"> Назначения сеанса гемодиализа</h3>
   <p>Программа аппарата</p>
   <div>
-    <button>HD</button>
-    <button>HDF</button>
-    <button>UF</button>
+    <button class="btn">HD</button>
+    <button class="btn">HDF</button>
+    <button class="btn">UF</button>
   </div>
 
   <p>Диализатор</p>
-  <div>
-    <button>Спр. "Диализаторы"</button>
-    <button class="material-icons" @click="showPopup">menu_open</button>
+  <div class="div">
+    <button class="btn-1">Спр. "Диализаторы"</button>
+    <button class="material-icons btn-2" @click="showPopup">menu_open</button>
   </div>
 
   <p>Концентратор</p>
-  <div>
-    <button>Спр. "Концентраторы"</button>
-    <button class="material-icons">menu_open</button>
-    <button>10 л.</button>
+  <div class="div">
+    <button class="btn-1">Спр. "Концентраторы"</button>
+    <button class="material-icons btn-2">menu_open</button>
+    <button class="btn-3">10 л.</button>
   </div>
 
   <p>Тип инъекции</p>
   <div>
-    <button>Игла</button>
-    <button>Катетер</button>
+    <button class="btn">Игла</button>
+    <button class="btn">Катетер</button>
+  </div>
+
+  <div class="div">
+    <button class="btn-1">Спр. "Иглы"</button>
+    <button class="material-icons btn-2">menu_open</button>
+    <button class="btn-1">Спр. "Типы иглы"</button>
+    <button class="material-icons btn-2">menu_open</button>
+  </div>
+
+  <div class="div">
+    <button class="btn-1">Спр. "Катетеры"</button>
+    <button class="material-icons btn-2">menu_open</button>
+    <button class="btn-1">Спр. "Типы катетеров"</button>
+    <button class="material-icons btn-2">menu_open</button>
   </div>
 
   <div>
-    <button>Спр. "Иглы"</button>
-    <button class="material-icons">menu_open</button>
-    <button>Спр. "Типы иглы"</button>
-    <button class="material-icons">menu_open</button>
-  </div>
 
-  <div>
-    <button>Спр. "Катетеры"</button>
-    <button class="material-icons">menu_open</button>
-    <button>Спр. "Типы катетеров"</button>
-    <button class="material-icons">menu_open</button>
-  </div>
+    <div class="div">
+      <div>
+        <span>Бикарбонат</span>
+        <div class="div">
+          <button class="btn-3">ХХХгр/л</button>
+          <button class="material-icons btn-2">menu_open</button>
+        </div>
+      </div>
 
-  <div>
-    <div>
-      <span>Бикарбонат</span>
-      <span>Сухой Вес</span>
-      <span>Антикоагуляция</span>
-      <span>Объем</span>
+      <div>
+        <p>Сухой Вес</p>
+        <div class="div">
+          <button class="btn-3">ХХХ кг</button>
+        </div>
+      </div>
+
+      <div>
+        <span>Антикоагуляция</span>
+        <div class="div">
+          <button class="btn-3">Наименование</button>
+          <button class="material-icons btn-2">menu_open</button>
+        </div>
+      </div>
+
+      <div>
+        <p>Объем</p>
+        <div class="div">
+          <button class="btn-3">ХХХ ед</button>
+        </div>
+      </div>
+
     </div>
-
-    <div>
-      <button>ХХХгр/л</button>
-      <button class="material-icons">menu_open</button>
-      <button>ХХХ кг</button>
-      <button>Наименование</button>
-      <button class="material-icons">menu_open</button>
-      <button>ХХХ ед</button>
-    </div>
   </div>
 
   <div>
-    <button>Сформировать сеанс</button>
+    <button class="btn">Сформировать сеанс</button>
   </div>
 
   <div class="appointment">
     <h4>Назначения сеанса гемодиализа</h4>
-    <div>
-      <span><span class="material-icons">tv</span> - Программа</span>
-      <span><span class="material-icons">add</span>- Диализатор</span>
+    <div style="display: flex">
+      <div class="div">
+        <span class="material-icons">tv</span>
+        <span> -Программа</span>
+      </div>
+
+      <div class="div">
+        <span class="material-icons">tv</span>
+        <span> -Диализатор</span>
+      </div>
     </div>
 
-    <div>
-      <span> <span class="material-icons">add</span> - Концентратор Объём</span>
-      <span> <span class="material-icons">add</span>- Игла/Катетер</span>
-      <span> <span class="material-icons">add</span>Бикарбонат мл</span>
+    <div style="display: flex">
+      <div class="div">
+        <span class="material-icons">tv</span>
+        <span> -Концентратор Объём</span>
+      </div>
+
+      <div class="div">
+        <span class="material-icons">tv</span>
+        <span> -Игла/Катетер</span>
+      </div>
+
+      <div class="div">
+        <span class="material-icons">tv</span>
+        <span>Бикарбонат мл</span>
+      </div>
+
     </div>
 
-    <div>
-      <span> <span></span><span class="material-icons">add</span>- Антикоагуляция ед.</span>
-      <span><span class="material-icons">add</span>Сухой вес кг.</span>
+    <div style="display: flex">
+      <div class="div">
+        <span class="material-icons">tv</span>
+        <span>- Антикоагуляция ед.</span>
+      </div>
+
+      <div class="div">
+        <span class="material-icons">tv</span>
+        <span>Сухой вес кг.</span>
+      </div>
+
     </div>
   </div>
 
-  <h4>Назначения сеанса гемодиализа</h4>
+  <h3 class="session__title">Назначения после сеанса</h3>
   <span>Лекарственный препарат</span>
 
-  <div>
-    <button>Спр. "Препараты"</button>
-    <button class="material-icons">menu_open</button>
+  <div class="div">
+    <button class="btn-1">Спр. "Препараты"</button>
+    <button class="material-icons btn-2">menu_open</button>
   </div>
 
   <div>
     <div>
-      <span>Путь приема</span>
       <span>Дозировка</span>
     </div>
 
-    <div>
-      <button>Спр. "Путь приема"</button>
-      <button>Спр. "Дозы препаратов"</button>
-      <button class="material-icons">menu_open</button>
+    <div class="div">
+      <div>
+        <span>Путь приема</span>
+        <div class="div">
+          <button class="btn-1">Спр. "Путь приема"</button>
+        </div>
+
+      </div>
+
+      <div>
+        <span>Дозировка</span>
+        <div class="div">
+          <button class="btn-1">Спр. "Дозы препаратов"</button>
+          <button class="material-icons btn-2">menu_open</button>
+        </div>
+
+      </div>
+
+
     </div>
   </div>
 
   <p>Номера сеансов:</p>
   <div>
-    <button v-for="number in [1, 2, 3, 4, 5, 6, 7]" :key="number">{{ number }}</button>
+    <button class="btn-3" v-for="number in [1, 2, 3, 4, 5, 6, 7]" :key="number">{{ number }}</button>
   </div>
 
-  <div>
-    <div>
-      <span>Начало приёма</span>
-      <span>Конец приёма</span>
-    </div>
+  <div class="div">
+    <div style="display: flex">
+      <div>
+        <span>Начало приёма</span>
+        <div class="div btn-3">
+          <span>DD.MM.YYYY</span>
+          <span class="material-icons">event</span>
+        </div>
+      </div>
 
-    <div>
-      <button>DD.MM.YYYY <span class="material-icons">event</span></button>
-      <button>DD.MM.YYYY <span class="material-icons">event</span></button>
+      <div>
+        <span>Конец приёма</span>
+        <div class="div btn-3">
+          <span>DD.MM.YYYY</span>
+          <span class="material-icons">event</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <button>Сформировать</button>
-  <p>Список назначений после сеансов</p>
-  <v-table :data="yourData" @delete-row="deleteRow" />
+  <button class="btn">Сформировать</button>
 
-  <h3>Лечение на дому</h3>
+  <p style="margin: 30px 0">Список назначений после сеансов</p>
+  <v-table :data="yourData" @delete-row="deleteRow"/>
+
+  <h3 class="session__title">Лечение на дому</h3>
   <span>Лекарственный препарат</span>
-  <div>
-    <button>Спр. "Препараты"</button>
-    <button class="material-icons">menu_open</button>
+
+  <div class="div">
+    <button class="btn-1">Спр. "Препараты"</button>
+    <button class="material-icons btn-2">menu_open</button>
   </div>
 
   <div>
-    <div>
-      <span>Путь приема</span>
-      <span>Дозировка</span>
-    </div>
+    <div class="div">
+      <div>
+        <span>Путь приема</span>
+        <div class="div">
+          <button class="btn-1">Спр. "Путь приема"</button>
+        </div>
 
-    <div>
-      <button>Спр. "Путь приема"</button>
-      <button>Спр. "Дозы препаратов"</button>
-      <button class="material-icons">menu_open</button>
+      </div>
+
+      <div>
+        <span>Дозировка</span>
+        <div class="div">
+          <button class="btn-1">Спр. "Дозы препаратов"</button>
+          <button class="material-icons btn-2">menu_open</button>
+        </div>
+
+      </div>
     </div>
   </div>
 
-  <div>
-    <div>
-      <span>Кратность приёма</span>
-      <span>Начало приёма</span>
-      <span>Конец приёма</span>
-    </div>
+  <div class="div">
+    <div style="display: flex">
+      <div>
+        <span>Кратность приёма</span>
+        <div class="div">
+          <button class="btn-1">Спр. "Кр-ть приема"</button>
+        </div>
+      </div>
 
-    <div>
-      <button>Спр. "Кр-ть приема" </button>
-      <button class="material-icons">menu_open</button>
-      <button>DD.MM.YYYY <span class="material-icons">event</span></button>
-      <button>DD.MM.YYYY <span class="material-icons">event</span></button>
+      <div>
+        <span>Начало приёма</span>
+        <div class="div btn-3">
+          <span>DD.MM.YYYY</span>
+          <span class="material-icons">event</span>
+        </div>
+      </div>
+
+      <div>
+        <span>Конец приёма</span>
+        <div class="div btn-3">
+          <span>DD.MM.YYYY</span>
+          <span class="material-icons">event</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <p>Количество дней: <span class="blue">XX</span></p>
+
+  <div>
+    <button class="btn">Добавить</button>
+  </div>
 
   <p>Лечение на дому</p>
 
   <div class="appointment">
     <div>
       <span>Лекарственный препарат</span>
-      <span>Перорально</span>
+      <span> Перорально</span>
       <span>5 мг</span>
     </div>
 
     <div>
-      <span>2 раза в день утром и вечером</span>
-      <span>с 01.01.222 по 10.01.2022</span>
+      <span>2 раза в день утром и вечером </span>
+      <span> с01.01.222 по10.01.2022 </span>
       <span> 10 дней</span>
     </div>
   </div>
 
-  <h3>Рекомендации</h3>
-
-  <form>
-    <div>
-      <input placeholder="Текст рекомендации пациенту">
-      <button class="material-icons">add</button>
-    </div>
-    <textarea placeholder="Рекомендации лечащего врача пациенту"></textarea>
-  </form>
+  <h3 class="session__title">Рекомендации</h3>
 
   <div>
-    <span class="material-icons">event</span>
-    <span>DD.MM.YYYY HH:MM</span>
-    <span class="material-icons">person</span>
-    <span>ФИО лечащего врача</span>
-    <span> Должность</span>
+    <form>
+      <div class="recommendation">
+        <input placeholder="Patient recommendation text">
+        <button class="material-icons btn-2">add</button>
+      </div>
+      <textarea placeholder="Doctor's recommendation to the patient"></textarea>
+    </form>
+
+    <div class="info">
+      <span class="material-icons">event</span>
+      <span>Date: DD.MM.YYYY HH:MM</span>
+      <span class="material-icons">person</span>
+      <span>Doctor's Full Name</span>
+      <span>Position</span>
+    </div>
   </div>
 
   <div>
-    <button>Сохранить назначения</button>
+    <button class="btn">Сохранить назначения</button>
   </div>
 </template>
 
@@ -249,20 +344,60 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.session {
+  display: flex;
+  align-items: baseline;
+
+  &__title {
+    margin: 10px 250px 25px 0;
+  }
+}
+
 .div {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  margin: 5px 5px 5px 0;
 }
 
 .appointment {
   border: 1px solid #ddd;
-  width: 50%;
+  width: 63%;
   padding: 10px;
+  margin: 25px 0;
 }
 
 .blue {
   color: rgba(5, 99, 120, 0.85);
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+.recommendation {
+  display: flex;
+  align-items: center;
+}
+
+input {
+  width: 59%;
+  padding: 3px;
+  margin-right: 10px;
+}
+
+textarea {
+  width: 63%;
+  height: 100px;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.info span {
+  margin-right: 10px;
 }
 </style>
