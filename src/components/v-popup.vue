@@ -1,7 +1,6 @@
 <template>
   <div class="popup_wrapper" ref="popup_wrapper">
     <div class="v-popup">
-
       <div class="v-popup__header">
         <strong>Лекарственные препараты</strong>
         <button class="close_modal btn" @click="onClosePopup">Закрыть</button>
@@ -9,43 +8,6 @@
 
       <div class="v-popup__content">
         <slot></slot>
-        <form>
-          <div class="search">
-            <input placeholder="Search by first characters">
-            <button style="margin-left: 27px" class="material-icons">search</button>
-          </div>
-
-          <div class="add-entry">
-            <input placeholder="Add a new entry">
-            <button style="margin-left: 27px" class="material-icons">add</button>
-          </div>
-
-          <div class="needle-sizes">
-            <div style="display: flex; align-items: center">
-              <input placeholder="Needle size No1">
-              <button class="material-icons">delete</button>
-              <button class="material-icons">chevron_right</button>
-            </div>
-
-            <div style="display: flex; align-items: center">
-              <input placeholder="Needle size No2">
-              <button class="material-icons">delete</button>
-              <button class="material-icons">chevron_right</button>
-            </div>
-
-            <div style="display: flex; align-items: center">
-              <input placeholder="Needle size No3">
-              <button class="material-icons">delete</button>
-              <button class="material-icons">chevron_right</button>
-            </div>
-
-            <div style="display: flex; align-items: center">
-              <input placeholder="Needle size No4">
-              <button class="material-icons">delete</button>
-              <button class="material-icons">chevron_right</button>
-            </div>
-          </div>
-        </form>
       </div>
     </div>
   </div>
@@ -56,13 +18,11 @@ export default {
   name: "v-popup",
   props: {
     onClose: Function,
-  },
-  data() {
-    return {}
+    dynamicContent: Array,
   },
   methods: {
     onClosePopup() {
-      this.$emit('onClose')
+      this.$emit('onClose');
     },
   },
   mounted() {
@@ -71,10 +31,9 @@ export default {
       if (item.target === vm.$refs['popup_wrapper']) {
         vm.onClosePopup();
       }
-    })
+    });
   },
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -110,28 +69,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-
-  form {
-    margin-top: 20px;
-  }
-
-  .search,
-  .add-entry, {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-  }
-
-  .needle-sizes {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-  }
-
-  input {
-    padding: 5px;
-    width: 300px;
   }
 }
 </style>

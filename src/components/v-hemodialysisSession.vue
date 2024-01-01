@@ -1,6 +1,22 @@
 <template>
   <div class="session">
-    <v-popup v-if="isInfoPopupVisible" @onClose="closeInfoPopup"/>
+    <v-popup v-if="isInfoPopupVisible" @onClose="closeInfoPopup" :dynamicContent="needlePlaceholders">
+      <div v-if="selectedContent === 'Типы иглы'">
+        <vNeedleForm :needlePlaceholders="needlePlaceholders"></vNeedleForm>
+      </div>
+
+      <div v-if="selectedContent === 'Иглы'">
+        <vNeedleForm :needlePlaceholders="needlePlaceholders2"></vNeedleForm>
+      </div>
+
+      <div v-if="selectedContent === 'Катетеры'">
+        <vNeedleForm :needlePlaceholders="needlePlaceholders3"></vNeedleForm>
+      </div>
+
+      <div v-if="selectedContent === 'Типы катетеров'">
+        <vNeedleForm :needlePlaceholders="needlePlaceholders4"></vNeedleForm>
+      </div>
+    </v-popup>
 
     <h3 class="session__title">Сеанс гемодиализа</h3>
     <p>No месяце:<span class="blue"> 4 </span></p>
@@ -9,15 +25,33 @@
   <h3 class="session__title"> Назначения сеанса гемодиализа</h3>
   <p>Программа аппарата</p>
   <div>
-    <button class="btn">HD</button>
-    <button class="btn">HDF</button>
-    <button class="btn">UF</button>
+    <button
+        class="btn"
+        :class="{ 'selected': selectedProgram === 'HD' }"
+        @click="selectProgram('HD')"
+    >
+      HD
+    </button>
+    <button
+        class="btn"
+        :class="{ 'selected': selectedProgram === 'HDF' }"
+        @click="selectProgram('HDF')"
+    >
+      HDF
+    </button>
+    <button
+        class="btn"
+        :class="{ 'selected': selectedProgram === 'UF' }"
+        @click="selectProgram('UF')"
+    >
+      UF
+    </button>
   </div>
 
   <p>Диализатор</p>
   <div class="div">
     <button class="btn-1">Спр. "Диализаторы"</button>
-    <button class="material-icons btn-2" @click="showPopup">menu_open</button>
+    <button class="material-icons btn-2">menu_open</button>
   </div>
 
   <p>Концентратор</p>
@@ -29,22 +63,37 @@
 
   <p>Тип инъекции</p>
   <div>
-    <button class="btn">Игла</button>
-    <button class="btn">Катетер</button>
+    <button
+        class="btn"
+        :class="{ 'selected': selectedInjection === 'Игла' }"
+        @click="selectInjection('Игла')"
+        :disabled="!isInjectionTypeSelected"
+    >
+      Игла
+    </button>
+    <button
+        class="btn"
+        :class="{ 'selected': selectedInjection === 'Катетер' }"
+        @click="selectInjection('Катетер')"
+        :disabled="!isInjectionTypeSelected"
+    >
+      Катетер
+    </button>
+
   </div>
 
   <div class="div">
     <button class="btn-1">Спр. "Иглы"</button>
-    <button class="material-icons btn-2">menu_open</button>
+    <button class="material-icons btn-2" @click="showPopup('Иглы')">menu_open</button>
     <button class="btn-1">Спр. "Типы иглы"</button>
-    <button class="material-icons btn-2">menu_open</button>
+    <button class="material-icons btn-2" @click="showPopup('Типы иглы')">menu_open</button>
   </div>
 
   <div class="div">
     <button class="btn-1">Спр. "Катетеры"</button>
-    <button class="material-icons btn-2">menu_open</button>
+    <button class="material-icons btn-2" @click="showPopup('Катетеры')">menu_open</button>
     <button class="btn-1">Спр. "Типы катетеров"</button>
-    <button class="material-icons btn-2">menu_open</button>
+    <button class="material-icons btn-2" @click="showPopup('Типы катетеров')">menu_open</button>
   </div>
 
   <div>
@@ -304,16 +353,20 @@
 <script lang="ts">
 import vPopup from './v-popup.vue'
 import vTable from './v-table.vue'
+import vNeedleForm from './v-neadleForm.vue';
 
 export default {
   name: 'hemodialysisSession',
   components: {
     vPopup,
-    vTable
+    vTable,
+    vNeedleForm
   },
   data() {
     return {
       isInfoPopupVisible: false,
+      selectedProgram: '',
+      selectedInjection: null as string | null,
       yourData: [
         {
           name: 'Лекарственный препарат No1', reception: 'Перорально',
@@ -328,17 +381,32 @@ export default {
           dosage: '20мг', start: 'DD.MM.YYYY', end: 'DD.MM.YYYY', number: 6, days: 2
         }
       ],
+      needlePlaceholders: ["Венозные", "Артериальные"],
+      needlePlaceholders2: ["Игла размер No1", "Игла размер No2", "Игла размер No3", "Игла размер No4"],
+      needlePlaceholders3: ["Катетер No1", "Катетер No2", "Катетер No3", "Катетер No4"],
+      needlePlaceholders4: ["Катетер Фолея", "Катетер Малеко", "Катетер Пеццера", "Катетер Тиманна",
+      "Катетер Нелатона"],
+      selectedContent: '',
     }
   },
   methods: {
-    showPopup() {
-      this.isInfoPopupVisible = true
+    showPopup(content) {
+      this.selectedContent = content;
+      this.isInfoPopupVisible = true;
     },
     closeInfoPopup() {
-      this.isInfoPopupVisible = false
+      this.isInfoPopupVisible = false;
     },
     deleteRow(number: number) {
       this.yourData = this.yourData.filter(item => item.number !== number);
+    },
+    selectProgram(program) {
+      this.selectedProgram = program;
+    },
+  },
+  computed: {
+    isInjectionTypeSelected() {
+      return this.selectedInjection !== null;
     },
   },
 }
