@@ -38,7 +38,6 @@ export default {
 
 <style lang="scss" scoped>
 .popup_wrapper {
-  background: rgba(64, 64, 64, .4);
   display: flex;
   justify-content: center;
   position: absolute;

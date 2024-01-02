@@ -1,6 +1,5 @@
 import './assets/main.css'
 import 'material-design-icons-iconfont'
-
 import { createApp } from 'vue'
 
 import { createPinia } from 'pinia'

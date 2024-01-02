@@ -13,10 +13,53 @@
         <vNeedleForm :needlePlaceholders="needlePlaceholders3"></vNeedleForm>
       </div>
 
-      <div v-if="selectedContent === 'Типы катетеров'">
+      <div v-if="selectedContent === 'Препараты'">
         <vNeedleForm :needlePlaceholders="needlePlaceholders4"></vNeedleForm>
       </div>
     </v-popup>
+
+    <v-generic-modal v-if="isInfoPopupVisible" @onClose="closeInfoPopup" :dynamicContent="genericPlaceholders">
+      <div v-if="selectedContent === 'XXX'">
+        <div class="needle-sizes">
+          <div v-for="(placeholder, index) in genericPlaceholders" :key="index" style="display: flex; align-items: center">
+            <span class="placeholder">{{ placeholder }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="selectedContent === 'Типы катетеров'">
+        <div class="needle-sizes">
+          <div v-for="(placeholder, index) in genericPlaceholders2" :key="index" style="display: flex; align-items: center">
+            <span class="placeholder">{{ placeholder }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="selectedContent === 'Путь приема'">
+        <div class="needle-sizes">
+          <div v-for="(placeholder, index) in genericPlaceholders3" :key="index" style="display: flex; align-items: center">
+            <span class="placeholder">{{ placeholder }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="selectedContent === 'Дозы препаратов'">
+        <div class="needle-sizes">
+          <div v-for="(placeholder, index) in genericPlaceholders4" :key="index" style="display: flex; align-items: center">
+            <span class="placeholder">{{ placeholder }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="selectedContent === 'Кратность приёма'">
+        <div class="needle-sizes">
+          <div v-for="(placeholder, index) in genericPlaceholders5" :key="index" style="display: flex; align-items: center">
+            <span class="placeholder">{{ placeholder }}</span>
+          </div>
+        </div>
+      </div>
+
+    </v-generic-modal>
 
     <h3 class="session__title">Сеанс гемодиализа</h3>
     <p>No месяце:<span class="blue"> 4 </span></p>
@@ -103,7 +146,7 @@
         <span>Бикарбонат</span>
         <div class="div">
           <button class="btn-3">ХХХгр/л</button>
-          <button class="material-icons btn-2">menu_open</button>
+          <button class="material-icons btn-2" @click="showPopup('XXX')">menu_open</button>
         </div>
       </div>
 
@@ -187,33 +230,25 @@
 
   <div class="div">
     <button class="btn-1">Спр. "Препараты"</button>
-    <button class="material-icons btn-2">menu_open</button>
+    <button class="material-icons btn-2" @click="showPopup('Препараты')">menu_open</button>
   </div>
 
   <div>
-    <div>
-      <span>Дозировка</span>
-    </div>
-
     <div class="div">
       <div>
         <span>Путь приема</span>
         <div class="div">
-          <button class="btn-1">Спр. "Путь приема"</button>
+          <button class="btn-1" @click="showPopup('Путь приема')">Путь приема</button>
         </div>
-
       </div>
 
       <div>
         <span>Дозировка</span>
         <div class="div">
           <button class="btn-1">Спр. "Дозы препаратов"</button>
-          <button class="material-icons btn-2">menu_open</button>
+          <button class="material-icons btn-2" @click="showPopup('Дозы препаратов')">menu_open</button>
         </div>
-
       </div>
-
-
     </div>
   </div>
 
@@ -252,7 +287,7 @@
 
   <div class="div">
     <button class="btn-1">Спр. "Препараты"</button>
-    <button class="material-icons btn-2">menu_open</button>
+    <button class="material-icons btn-2" @click="showPopup('Препараты')">menu_open</button>
   </div>
 
   <div>
@@ -260,18 +295,16 @@
       <div>
         <span>Путь приема</span>
         <div class="div">
-          <button class="btn-1">Спр. "Путь приема"</button>
+          <button class="btn-1" @click="showPopup('Путь приема')">Путь приема</button>
         </div>
-
       </div>
 
       <div>
         <span>Дозировка</span>
         <div class="div">
           <button class="btn-1">Спр. "Дозы препаратов"</button>
-          <button class="material-icons btn-2">menu_open</button>
+          <button class="material-icons btn-2" @click="showPopup('Дозы препаратов')">menu_open</button>
         </div>
-
       </div>
     </div>
   </div>
@@ -282,6 +315,7 @@
         <span>Кратность приёма</span>
         <div class="div">
           <button class="btn-1">Спр. "Кр-ть приема"</button>
+          <button class="material-icons btn-2" @click="showPopup('Кратность приёма')">menu_open</button>
         </div>
       </div>
 
@@ -351,16 +385,18 @@
 </template>
 
 <script lang="ts">
-import vPopup from './v-popup.vue'
-import vTable from './v-table.vue'
+import vPopup from './v-popup.vue';
+import vTable from './v-table.vue';
 import vNeedleForm from './v-neadleForm.vue';
+import vGenericModal from './v-genericModal.vue';
 
 export default {
   name: 'hemodialysisSession',
   components: {
     vPopup,
     vTable,
-    vNeedleForm
+    vNeedleForm,
+    vGenericModal
   },
   data() {
     return {
@@ -383,9 +419,14 @@ export default {
       ],
       needlePlaceholders: ["Венозные", "Артериальные"],
       needlePlaceholders2: ["Игла размер No1", "Игла размер No2", "Игла размер No3", "Игла размер No4"],
+      needlePlaceholders4: ["Лекарственный препарат No1", "Лекарственный препарат No2", "Лекарственный препарат No3", "Лекарственный препарат No4"],
       needlePlaceholders3: ["Катетер No1", "Катетер No2", "Катетер No3", "Катетер No4"],
-      needlePlaceholders4: ["Катетер Фолея", "Катетер Малеко", "Катетер Пеццера", "Катетер Тиманна",
+      genericPlaceholders2: ["Катетер Фолея", "Катетер Малеко", "Катетер Пеццера", "Катетер Тиманна",
       "Катетер Нелатона"],
+      genericPlaceholders: ["граммов", "литров"],
+      genericPlaceholders3: ["Перорально", "Внутривенно", "Аретериально"],
+      genericPlaceholders4: [" мкг ", " мл ", " мг/кг "],
+      genericPlaceholders5: ["1 раз в день", "2 раза в день ", "3 раза в день "],
       selectedContent: '',
     }
   },
