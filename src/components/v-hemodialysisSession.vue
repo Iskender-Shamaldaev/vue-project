@@ -110,7 +110,6 @@
         class="btn"
         :class="{ 'selected': selectedInjection === 'Игла' }"
         @click="selectInjection('Игла')"
-        :disabled="!isInjectionTypeSelected"
     >
       Игла
     </button>
@@ -118,7 +117,6 @@
         class="btn"
         :class="{ 'selected': selectedInjection === 'Катетер' }"
         @click="selectInjection('Катетер')"
-        :disabled="!isInjectionTypeSelected"
     >
       Катетер
     </button>
@@ -184,7 +182,7 @@
     <div style="display: flex">
       <div class="div">
         <span class="material-icons">tv</span>
-        <span> -Программа</span>
+        <span> -Программа: {{ selectedProgram }}</span>
       </div>
 
       <div class="div">
@@ -201,7 +199,7 @@
 
       <div class="div">
         <span class="material-icons">tv</span>
-        <span> -Игла/Катетер</span>
+        <span>: {{ selectedInjection }}</span>
       </div>
 
       <div class="div">
@@ -364,10 +362,10 @@
   <div>
     <form>
       <div class="recommendation">
-        <input placeholder="Patient recommendation text">
+        <input placeholder="Текст рекомендации пациенту">
         <button class="material-icons btn-2">add</button>
       </div>
-      <textarea placeholder="Doctor's recommendation to the patient"></textarea>
+      <textarea placeholder="Рекомендации лечащего врача пациенту"></textarea>
     </form>
 
     <div class="info">
@@ -402,7 +400,7 @@ export default {
     return {
       isInfoPopupVisible: false,
       selectedProgram: '',
-      selectedInjection: null as string | null,
+      selectedInjection: '',
       yourData: [
         {
           name: 'Лекарственный препарат No1', reception: 'Перорально',
@@ -444,10 +442,8 @@ export default {
     selectProgram(program) {
       this.selectedProgram = program;
     },
-  },
-  computed: {
-    isInjectionTypeSelected() {
-      return this.selectedInjection !== null;
+    selectInjection(program) {
+      this.selectedInjection = program;
     },
   },
 }
